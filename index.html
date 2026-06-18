@@ -336,6 +336,28 @@
         }
 
         /* ============================================================
+           QR-КОД
+           ============================================================ */
+        .qr-section {
+            text-align: center;
+            padding: 60px 0;
+            background: #fff;
+        }
+
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 4px solid #FF6B35;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .qr-section img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ============================================================
            КОНТАКТЫ
            ============================================================ */
         .contacts {
@@ -413,6 +435,11 @@
             .btn {
                 justify-content: center;
             }
+
+            .qr-section img {
+                width: 150px;
+                height: 150px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -434,6 +461,11 @@
 
             .section-title {
                 font-size: 22px;
+            }
+
+            .qr-section img {
+                width: 120px;
+                height: 120px;
             }
         }
     </style>
@@ -558,6 +590,19 @@
                 </div>
 
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    QR-КОД
+    ============================================================ -->
+    <section class="qr-section">
+        <div class="container">
+            <h2 class="section-title">📱 <span class="accent">QR-код</span></h2>
+            <p class="section-sub">
+                Наведи камеру телефона на QR-код, чтобы открыть сайт
+            </p>
+            <img src="qrcode.png" alt="QR-код для скачивания RocolProject">
         </div>
     </section>
 
