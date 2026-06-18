@@ -1,0 +1,622 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ RocolProject — Учёт фенов</title>
+    <style>
+        /* ============================================================
+           ГЛОБАЛЬНЫЙ СТИЛЬ
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: #f5f7fa;
+            color: #1a1a2e;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+           ШАПКА
+           ============================================================ */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 80px 20px 60px;
+            text-align: center;
+            color: #fff;
+            border-bottom: 4px solid #FF6B35;
+        }
+
+        .header h1 {
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .header h1 span {
+            color: #FF6B35;
+        }
+
+        .header .subtitle {
+            font-size: 20px;
+            color: #b0b0c0;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.06);
+            padding: 10px 28px;
+            border-radius: 40px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .header .badge strong {
+            color: #FF6B35;
+        }
+
+        .header .badge .highlight {
+            color: #4ECDC4;
+        }
+
+        /* ============================================================
+           СЕКЦИИ
+           ============================================================ */
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid #e8ecf1;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #1a1a2e;
+        }
+
+        .section-title .accent {
+            color: #FF6B35;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #6b6b7a;
+            font-size: 17px;
+            max-width: 560px;
+            margin: 0 auto 40px;
+        }
+
+        /* ============================================================
+           КАРТОЧКИ "О ПРОЕКТЕ"
+           ============================================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .about-item {
+            background: #fff;
+            padding: 28px 16px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #eef0f4;
+            transition: all 0.3s ease;
+        }
+
+        .about-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-color: #FF6B35;
+        }
+
+        .about-item .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .about-item h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .about-item p {
+            font-size: 14px;
+            color: #6b6b7a;
+            margin-top: 4px;
+        }
+
+        /* ============================================================
+           ТЕХНОЛОГИИ
+           ============================================================ */
+        .tech-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tech-grid span {
+            background: #fff;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            border: 1px solid #e8ecf1;
+            transition: all 0.3s ease;
+        }
+
+        .tech-grid span:hover {
+            border-color: #FF6B35;
+            color: #FF6B35;
+            transform: scale(1.03);
+        }
+
+        /* ============================================================
+           КАРТОЧКИ ПРИЛОЖЕНИЙ
+           ============================================================ */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 28px 28px;
+            border: 1px solid #eef0f4;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+            border-color: #FF6B35;
+        }
+
+        .card .icon {
+            font-size: 40px;
+            margin-bottom: 4px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a2e;
+        }
+
+        .card .platform {
+            font-size: 14px;
+            color: #FF6B35;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card .features {
+            list-style: none;
+            flex: 1;
+        }
+
+        .card .features li {
+            padding: 6px 0;
+            color: #4a4a5a;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #f0f2f6;
+        }
+
+        .card .features li:last-child {
+            border-bottom: none;
+        }
+
+        .card .features li::before {
+            content: "✦";
+            color: #FF6B35;
+            font-size: 12px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #FF6B35;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #e85d2c;
+            transform: scale(1.03);
+        }
+
+        .btn-success {
+            background: #2ECC71;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: scale(1.03);
+        }
+
+        .btn-outline {
+            background: #f0f2f6;
+            color: #4a4a5a;
+        }
+
+        .btn-outline:hover {
+            background: #e4e7ed;
+        }
+
+        /* ============================================================
+           СКРИНШОТЫ
+           ============================================================ */
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .screenshot-placeholder {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 2px dashed #e8ecf1;
+            color: #8a8a9a;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-placeholder:hover {
+            border-color: #FF6B35;
+            background: #fafafc;
+        }
+
+        .screenshot-placeholder .big-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .screenshot-placeholder span {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           КОНТАКТЫ
+           ============================================================ */
+        .contacts {
+            text-align: center;
+        }
+
+        .contacts p {
+            color: #4a4a5a;
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        .contacts strong {
+            color: #1a1a2e;
+        }
+
+        .contacts .glow-link {
+            color: #FF6B35;
+        }
+
+        .contacts .glow-link:hover {
+            color: #e85d2c;
+        }
+
+        /* ============================================================
+           ФУТЕР
+           ============================================================ */
+        .footer {
+            text-align: center;
+            padding: 32px 20px 24px;
+            border-top: 1px solid #e8ecf1;
+            color: #8a8a9a;
+            font-size: 14px;
+            background: #fafbfc;
+        }
+
+        .footer strong {
+            color: #FF6B35;
+        }
+
+        /* ============================================================
+           АДАПТИВНОСТЬ
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 40px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 30px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px 16px;
+            }
+
+            .card h3 {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    ШАПКА
+    ============================================================ -->
+    <header class="header">
+        <h1>⚡ Rocol<span>Project</span></h1>
+        <p class="subtitle">Учёт фенов — просто, быстро, надёжно</p>
+        <div class="badge">
+            <strong>Трофимов Савелий Сергеевич</strong>
+            <span style="color:#555;">·</span>
+            <span class="highlight">ИС-941</span>
+            <span style="color:#555;">·</span>
+            <span style="color:#888;">2026</span>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    СЕКЦИЯ 1 — О ПРОЕКТЕ
+    ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">О <span class="accent">проекте</span></h2>
+            <p class="section-sub">
+                RocolProject — система учёта фенов для автоматизации бизнес-процессов.
+                Доступна на двух платформах.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-item">
+                    <span class="icon">🧠</span>
+                    <h4>Умный учёт</h4>
+                    <p>Автоматизация данных о фенах</p>
+                </div>
+                <div class="about-item">
+                    <span class="icon">📊</span>
+                    <h4>Аналитика</h4>
+                    <p>Статистика в реальном времени</p>
+                </div>
+                <div class="about-item">
+                    <span class="icon">🔮</span>
+                    <h4>Гибкость</h4>
+                    <p>Десктоп + мобила</p>
+                </div>
+                <div class="about-item">
+                    <span class="icon">📤</span>
+                    <h4>Экспорт</h4>
+                    <p>Excel / CSV одним кликом</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    СЕКЦИЯ 2 — ТЕХНОЛОГИИ
+    ============================================================ -->
+    <section class="section" style="background:#fafbfc;">
+        <div class="container">
+            <h2 class="section-title">Технологический <span class="accent">стек</span></h2>
+            <p class="section-sub">Современные инструменты для надёжной работы</p>
+            <div class="tech-grid">
+                <span>🐍 Python · CustomTkinter</span>
+                <span>📱 Kotlin · Android</span>
+                <span>🗄️ Room · SQLite</span>
+                <span>📊 Excel · CSV</span>
+                <span>🧩 MVVM · Coroutines</span>
+                <span>🎨 Material Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    СЕКЦИЯ 3 — ПРИЛОЖЕНИЯ
+    ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Скачай <span class="accent">приложение</span></h2>
+            <p class="section-sub">Выбери свою платформу</p>
+
+            <div class="cards">
+
+                <!-- ДЕСКТОП -->
+                <div class="card">
+                    <div class="icon">🖥️</div>
+                    <h3>Десктоп</h3>
+                    <div class="platform">Windows · Python</div>
+                    <ul class="features">
+                        <li>Полный CRUD</li>
+                        <li>Умный поиск</li>
+                        <li>Статистика</li>
+                        <li>Экспорт Excel / CSV</li>
+                        <li>Тёмная / светлая тема</li>
+                    </ul>
+                    <div class="btn-group">
+                        <a href="dist/morojenoe.exe" class="btn btn-primary" download>⬇ Скачать .exe</a>
+                        <a href="#" class="btn btn-outline">Инструкция</a>
+                    </div>
+                </div>
+
+                <!-- МОБИЛА -->
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Мобила</h3>
+                    <div class="platform">Android · Kotlin</div>
+                    <ul class="features">
+                        <li>CRUD на ходу</li>
+                        <li>Мгновенный поиск</li>
+                        <li>Статистика</li>
+                        <li>Экспорт CSV</li>
+                        <li>Тёмная / светлая тема</li>
+                        <li>Звуки</li>
+                    </ul>
+                    <div class="btn-group">
+                        <a href="app-debug.apk" class="btn btn-success" download>⬇ Скачать .apk</a>
+                        <a href="#" class="btn btn-outline">Инструкция</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    СЕКЦИЯ 4 — СКРИНШОТЫ
+    ============================================================ -->
+    <section class="section" style="background:#fafbfc;">
+        <div class="container">
+            <h2 class="section-title">Галерея</h2>
+            <p class="section-sub">Как выглядит учёт фенов</p>
+            <div class="screenshot-grid">
+                <div class="screenshot-placeholder">
+                    <span class="big-icon">🖼️</span>
+                    Десктоп: <span>главный экран</span>
+                </div>
+                <div class="screenshot-placeholder">
+                    <span class="big-icon">🖼️</span>
+                    Мобила: <span>список товаров</span>
+                </div>
+                <div class="screenshot-placeholder">
+                    <span class="big-icon">🖼️</span>
+                    Десктоп: <span>диалог добавления</span>
+                </div>
+                <div class="screenshot-placeholder">
+                    <span class="big-icon">🖼️</span>
+                    Мобила: <span>статистика</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    СЕКЦИЯ 5 — КОНТАКТЫ
+    ============================================================ -->
+    <section class="section">
+        <div class="container contacts">
+            <h2 class="section-title">Контакты</h2>
+            <p><strong>Разработчик:</strong> Трофимов Савелий Сергеевич</p>
+            <p><strong>Группа:</strong> ИС-941</p>
+            <p><strong>Колледж:</strong> КПИТиП (Кемерово)</p>
+            <p><strong>Руководитель:</strong> Листруков Н.Н.</p>
+            <p style="margin-top:16px;color:#8a8a9a;font-size:13px;">📧 Учебная практика УП 01 ПМ.01</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ФУТЕР
+    ============================================================ -->
+    <footer class="footer">
+        <p>
+            © 2026 <strong>Трофимов Савелий Сергеевич</strong>
+            <span style="color:#ccc;">·</span>
+            Группа <strong>ИС-941</strong>
+            <span style="color:#ccc;">·</span>
+            КПИТиП
+        </p>
+        <p style="font-size:12px;color:#b0b0b0;margin-top:4px;">
+            Руководитель практики: Листруков Н.Н.
+        </p>
+    </footer>
+
+</body>
+</html>
